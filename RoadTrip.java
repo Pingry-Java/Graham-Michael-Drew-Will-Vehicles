@@ -9,15 +9,15 @@ public class RoadTrip
 		System.out.println("Please type what type of vehicle you would like to drive: bus, car, motorcycle, truck?"); 
 		String vehicleType = keyboard.nextLine(); 
 		
-		Bus vehicle = new Bus(); 
-		/*if (vehicleType.equals("bus"))
-			Vehicle vehicle = new Bus(); 
+		Vehicle vehicle; 
+		if (vehicleType.equals("bus"))
+			vehicle = new Bus(); 
 		else if (vehicleType.equals("car"))
-			Vehicle vehicle = new Car(); 
+			vehicle = new Car(); 
 		else if (vehicleType.equals("truck"))
-			Vehicle vehicle = new Truck(); 
+			vehicle = new Truck(); 
 		else
-			Vehicle vehicle = new Motorcycle(); */
+			vehicle = new Motorcycle();
 		
 		System.out.println("You are starting in New York. Will you make it across the country to San Francisco?");
 		System.out.println("I will fill the first tank of gas for you. Gas is 3 dollars a gallon, a tire is $90");
