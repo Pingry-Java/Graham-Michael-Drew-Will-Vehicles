@@ -10,17 +10,16 @@ public class Vehicle{
  protected int passengers;
  protected double cargo;
  protected int tires;
- protected double odometer;
  protected double forwardProgress;
  protected double speed; 
  
  protected static int[] gasStops; 
- protected static final finishLine = 2890; 
+ protected static final int finishLine = 2890; 
  
  static {
-  gasStops = new int[10]
+  gasStops = new int[10]; 
   for (int n = 0; n < 10; n++){
-   gasStops[n] = 200 * n+1 
+   gasStops[n] = 200 * n+1; 
   }
  }
  
@@ -31,8 +30,7 @@ public class Vehicle{
   fuel = 30; //Gallons 
   passengers = 5; //People 
   cargo = 0; //Pounds
-  tires = 5; 
-  odometer = 0; //Miles 
+  tires = 5;  
   forwardProgress = 0; //Miles 
   speed = 60; //Mph 
   
@@ -40,15 +38,27 @@ public class Vehicle{
  
  public void drive(){
    fuel -= 10;
-   odometer += 200;
    forwardProgress += 200; 
-   chance = (int) Math.random() * 100; 
-   if (chance = 1)
+   int chance = (int) Math.random() * 100; 
+   if (chance <= 20) //Chance of losing tire = distance / 10
     tires --; 
+   this.fillGas(); 
 
  } 
- public void driver(int distance){
- 
+ public void drive(int distance){
+   double distanceSoFar = forwardProgress + distance; 
+   //Take away ten gallons of fuel for every 200 miles
+   fuel -= (distance/200.0) * 10; 
+   double distanceToGas = distanceSoFar % 200; 
+   fuel -= (distanceToGas/200.0) * 10; 
+   //check to make sure they made it to gas station
+   if (fuel >= 0)
+   	this.fillGas(); 
+   forwardProgress += (distance + distanceToGas); 
+   int chances = (int) Math.random() * 100; 
+   if (chances <= (distance + (distanceToGas / 10)))
+    tires --; 
+   
  }
  public boolean isStranded(){
   return (tires < 4 || fuel <= 0 || money <= 0);
@@ -65,23 +75,30 @@ public class Vehicle{
  
  
  public double totalWeight(){
-  return weight + cargo; 
+  return baseWeight + cargo; 
  }
  
  public void fillGas(){
-  fuel == 30; 
+  double gallons = 30 - fuel; 	
+  fuel = 30; 
+  money -= (gallons * 3); //each gallon costs 3 dollars
+ }
+ 
+ public void buyTire(){
+  tires++; 
+  money -= 90; 
  }
  
  //Modifiers 
  
  public void setFuelCapacity(double x){
-  fuelCapcity = x; 
+  fuelCapacity = x; 
  } 
  public void setSeats(int x){
   seats = x; 
  } 
  public void setCargoCapacity(double x){
-  cargoCapcity = x; 
+  cargoCapacity = x; 
  } 
  public void setWheels(int x){
   wheels = x; 
@@ -89,46 +106,63 @@ public class Vehicle{
  public void setBaseWeight(double x){
   baseWeight = x;
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setMoney(double x){
+  money = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setFuel(double x){
+  fuel = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setPassengers(int x){
+  passengers = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setCargo(double x){
+  cargo = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setTires(int x){
+  tires = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setForwardProgress(int x){
+  forwardProgress = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public void setSpeed(double x){
+  speed = x; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ 
+ //Accessors
+public double getFuelCapacity(){
+  return fuelCapacity;  
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public int getSeats(){
+  return seats; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public double getCargoCapacity(){
+  return cargoCapacity; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public int getWheels(){
+  return wheels; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public double getBaseWeight(){
+  return baseWeight; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public double getMoney(){
+  return money; 
  } 
- public void setFuelCapacity(double x){
-  fuelCapcity = x 
+ public double getFuel(){
+  return fuel; 
+ } 
+ public int getPassengers(){
+  return passengers; 
+ } 
+ public double getCargo(){
+  return cargo; 
+ } 
+ public int getTires(){
+  return tires; 
+ } 
+ public double getForwardProgress(){
+  return forwardProgress; 
+ } 
+ public double getSpeed(){
+  return speed; 
  } 
 }
