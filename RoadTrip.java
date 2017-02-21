@@ -52,9 +52,10 @@ public class RoadTrip
 			}
 			
 			//Tell them the resources they have left
-			printResources();
+			printResources(vehicle);
 			
 			System.out.println();
+			
 			
 			if (vehicle.getForwardProgress()%200==0){
 			
@@ -66,13 +67,12 @@ public class RoadTrip
 					if ((30-vehicle.getFuel())*3>vehicle.getMoney()){
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
-						if (keyboard.nextLine().equals("yes")
-							sellItems(vehicle, cargoPrice);
+						if (keyboard.nextLine().equals("yes"))
+							sellItems(vehicle, cargoPrice, keyboard);
 					}
 					
-					if ((30-vehicle.getFuel())*3<=vehicle.getMoney(){
+					if ((30-vehicle.getFuel())*3<=vehicle.getMoney())
 						vehicle.fillGas();
-					}
 				}
 				System.out.println("Please type 'yes' if you would like to purchase a tire for the journey"); 
 				while (keyboard.nextLine().equals("yes")){
@@ -80,23 +80,25 @@ public class RoadTrip
 					if (vehicle.getMoney()<90){
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
-						if (keyboard.nextLine().equals("yes")
-							sellItems(vehicle, cargoPrice);
+						if (keyboard.nextLine().equals("yes"))
+							sellItems(vehicle, cargoPrice, keyboard);
 					}
 					
 					if (vehicle.getMoney()>=90){
 						vehicle.buyTire(); 
 					}
-					
-				System.out.println("Would you like to buy some cargo?");
-				if (keyboard.nextLine().equals("yes"){
-					buyItems(vehicle, cargoPrice):
 				}
+				
+				System.out.println("Would you like to buy some cargo?");
+				if (keyboard.nextLine().equals("yes")){
+					buyItems(vehicle, cargoPrice, keyboard);
+				}
+			}
 				
 		}
 	}
 	
-	public static void printResources(){
+	public static void printResources(Vehicle vehicle){
 		System.out.println("RESOURCES REMAINING"); 
 		System.out.println("\tGallons of gas: " + vehicle.getFuel()); 
 		System.out.println("\tTires remaining: " + vehicle.getTires()); 
@@ -104,13 +106,13 @@ public class RoadTrip
 		System.out.println("\tMoney remaining: " + vehicle.getMoney()); 
 	}
 	
-	public static void sellItems(vehicle vehicle, int cargoPrice){
+	public static void sellItems(Vehicle vehicle, int cargoPrice, Scanner keyboard){
 		System.out.println("This station is selling cargo for " + cargoPrice + " dollars");
 		System.out.println("How much cargo would you like to sell?");
 		vehicle.sellCargo(Integer.parseInt(keyboard.nextLine()), cargoPrice);
 	}
 	
-	public static void buyItems(vehicle vehivle, int cargoPrice){
+	public static void buyItems(Vehicle vehicle, int cargoPrice, Scanner keyboard){
 		System.out.println("This station is selling cargo for " + cargoPrice + " dollars");
 		System.out.println("How much cargo would you like buy?");
 		vehicle.buyCargo(Integer.parseInt(keyboard.nextLine()), cargoPrice);

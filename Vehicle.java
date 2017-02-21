@@ -4,6 +4,7 @@ public class Vehicle{
  protected static double cargoCapacity;
  protected static int wheels = 4;
  protected static double baseWeight = 1000;
+ protected static Engine engine;
  
  protected double money; 
  protected double fuel;
@@ -162,6 +163,9 @@ public double getFuelCapacity(){
  public double getBaseWeight(){
   return baseWeight; 
  } 
+ public double getWeight(){
+ 	return baseWeight + engine.getWeight() + this.cargo + this.passengers*150 + this.tires*10;
+ }
  public double getMoney(){
   return money; 
  } 
