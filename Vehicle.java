@@ -92,10 +92,18 @@ public class Vehicle{
  public void loadCargo(int x){
  	this.cargo+=x;
  }
- public void sellCargo(int x){
+ 
+ public void buyCargo(int x, int cargoPrice){
+ 	if(x*cargoPrice<this.money){
+ 		this.cargo+=x;
+ 		this.cargo-=x*cargoPrice;
+ 	}
+ }
+ 
+ public void sellCargo(int x, int cargoPrice){
  	if(cargo>=x){
  		this.cargo-=x;
- 		this.money+=10;
+ 		this.money+=x*cargoPrice;
  	}
  }
  

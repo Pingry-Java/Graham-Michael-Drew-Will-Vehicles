@@ -5,6 +5,8 @@ public class RoadTrip
 	public static void main(String[] args)
 	{
 		Scanner keyboard = new Scanner(System.in); 
+		int cargoPrice;
+		
 		System.out.println("Welcome to Road Trip, a REALLY fun, interactive game!"); 
 		System.out.println("Please type what type of vehicle you would like to drive: bus, car, motorcycle, truck?"); 
 		String vehicleType = keyboard.nextLine(); 
@@ -55,6 +57,9 @@ public class RoadTrip
 			System.out.println();
 			
 			if (vehicle.getForwardProgress()%200==0){
+			
+				cargoPrice = (int)(Math.random()*11+5);
+			
 				System.out.println("Please type 'yes' if you would like to top up your vehicle");
 				if (keyboard.nextLine().equals("yes")){
 				
@@ -62,7 +67,7 @@ public class RoadTrip
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
 						if (keyboard.nextLine().equals("yes")
-							sellItems(vehicle);
+							sellItems(vehicle, cargoPrice);
 					}
 					
 					if ((30-vehicle.getFuel())*3<=vehicle.getMoney(){
@@ -76,12 +81,17 @@ public class RoadTrip
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
 						if (keyboard.nextLine().equals("yes")
-							sellItems(vehicle);
+							sellItems(vehicle, cargoPrice);
 					}
 					
 					if (vehicle.getMoney()>=90){
 						vehicle.buyTire(); 
 					}
+					
+				System.out.println("Would you like to buy some cargo?");
+				if (keyboard.nextLine().equals("yes"){
+					buyItems(vehicle, cargoPrice):
+				}
 				
 		}
 	}
@@ -94,9 +104,15 @@ public class RoadTrip
 		System.out.println("\tMoney remaining: " + vehicle.getMoney()); 
 	}
 	
-	public static void sellItems(vehicle vehicle){
-		System.out.println("You have " + vehicle.getMoney() + " dollars left");
+	public static void sellItems(vehicle vehicle, int cargoPrice){
+		System.out.println("This station is selling cargo for " + cargoPrice + " dollars");
 		System.out.println("How much cargo would you like to sell?");
-		vehicle.sellCargo(Integer.parseInt(keyboard.nextLine()));
+		vehicle.sellCargo(Integer.parseInt(keyboard.nextLine()), cargoPrice);
+	}
+	
+	public static void buyItems(vehicle vehivle, int cargoPrice){
+		System.out.println("This station is selling cargo for " + cargoPrice + " dollars");
+		System.out.println("How much cargo would you like buy?");
+		vehicle.buyCargo(Integer.parseInt(keyboard.nextLine()), cargoPrice);
 	}
 }
