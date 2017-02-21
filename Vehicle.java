@@ -89,6 +89,16 @@ public class Vehicle{
   money -= 90; 
  }
  
+ public void loadCargo(int x){
+ 	this.cargo+=x;
+ }
+ public void sellCargo(int x){
+ 	if(cargo>=x){
+ 		this.cargo-=x;
+ 		this.money+=10;
+ 	}
+ }
+ 
  //Modifiers 
  
  public void setFuelCapacity(double x){

@@ -19,10 +19,6 @@ public class Truck extends Vehicle {
   speed = 50; //Mph 
  }
  
- public void loadCargo(int cargo){
-  this.cargo += cargo; 
- }
- 
  public void fillGas(){
   double gallons = 50 - fuel; 	
   fuel = 50; 
