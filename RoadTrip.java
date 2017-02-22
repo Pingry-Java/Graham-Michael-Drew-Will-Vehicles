@@ -42,8 +42,19 @@ public class RoadTrip
 			}
 			if (vehicle.isStranded())
 			{
-				System.out.println("You got stranded and now you must walk. So terrible!"); 
-				break; 
+				if (vehicle.getTires() < 4){
+					System.out.println("Your tires exploded! Now you must walk. So terrible!"); 
+					break; 
+				}
+				else if (vehicle.getFuel() <= 0){
+					System.out.println("Your gas tank is dry as the desert. Now you must walk. So terrible!"); 
+					break;
+				}
+				else if (vehicle.getMoney() <= 0){
+					System.out.println("You have no money, and your car doesn't drive poor people. Now you must walk. So terrible!");
+					break;
+				}
+
 			}
 			if (vehicle.arrived())
 			{
