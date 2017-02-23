@@ -154,7 +154,7 @@ public class Vehicle{
  /**
   * Purchases some amount of cargo. Adds the amount and subtracts the price (based on amount)
   * @param x The amount of cargo to be added
-  * @param cargoPrice The cost of the cargo, per pound, to be added.
+  * @param cargoPrice The cost of the cargo, per pound.
   */
  public void buyCargo(int x, int cargoPrice){
   if(x*cargoPrice<this.money){
@@ -164,8 +164,9 @@ public class Vehicle{
  }
  
  /**
-  * Checks how much a particular vehicle weighs
-  * @return the amount of weight, in pounds, of the vehicle plus cargo.
+  * Sells some amount of cargo. Subtracts the weight and adds the price (based on amount sold)
+  * @param x The amount of cargo to be sold
+  * @param cargoPrice The price of the cargo, per pound.
   */
  public void sellCargo(int x, int cargoPrice){
   if(cargo>=x){
@@ -174,11 +175,18 @@ public class Vehicle{
   }
  }
  
- //Modifiers 
- 
+ // Modifiers =========================================================================
+ /**
+  * Set the fuel capacity of a vehicle to some x
+  * @param x The fuel capacity a certain vehicle is being set to
+  */
  public void setFuelCapacity(double x){
   fuelCapacity = x; 
  } 
+ /**
+  * Set the number of seats to some x
+  * @param x The number of seats in the vehicle
+  */
  public void setSeats(int x){
   seats = x; 
  } 
@@ -213,8 +221,8 @@ public class Vehicle{
   speed = x; 
  } 
  
- //Accessors
-public double getFuelCapacity(){
+ // Accessors =========================================================================
+ public double getFuelCapacity(){
   return fuelCapacity;  
  } 
  public int getSeats(){
