@@ -16,11 +16,7 @@ public class Bus extends Vehicle{
   tires = 10; 
   forwardProgress = 0; //Miles 
   speed = 50; //Mph 
- }
- public void fillGas(){
-  double gallons = 40 - fuel; 	
-  fuel = 40; 
-  money -= (gallons * 3); //each gallon costs 3 dollars
+  engine = new Engine(8); 
  }
  
  public boolean isStranded(){
