@@ -11,7 +11,8 @@ public class RoadTrip
 		System.out.println("Please type what type of vehicle you would like to drive: bus, car, motorcycle, truck?"); 
 		String vehicleType = keyboard.nextLine(); 
 		
-		Vehicle vehicle; 
+		Vehicle vehicle;
+		 
 		if (vehicleType.equals("bus"))
 			vehicle = new Bus(); 
 		else if (vehicleType.equals("car"))
@@ -20,7 +21,7 @@ public class RoadTrip
 			vehicle = new Truck(); 
 		else
 			vehicle = new Motorcycle();
-		
+ 
 		System.out.println("You are starting in New York. Will you make it across the country to San Francisco?");
 		System.out.println("I will fill the first tank of gas for you. Gas is 3 dollars a gallon, a tire is $90");
 		System.out.println("BEWARE - the probability of blowing out a tire increases with distance traveled."); 
@@ -28,21 +29,43 @@ public class RoadTrip
 		
 		
 		vehicle.fillGas();  
+		
+		System.out.println("How many passangers will you take in your vehicle? "); 
+		int passengers = keyboard.nextInt(); 
+		keyboard.nextLine(); 
+		vehicle.setPassengers(passengers); 
+		//Passengers are cargo
+		int weighCargo = passengers * 150; 
+		
+		//Ask if they want cargo
+		System.out.println("How much cargo will you add? "); 
+		int cargo = keyboard.nextInt(); 
+		keyboard.nextLine(); 
+		vehicle.setCargo(weighCargo + cargo); 
+		
+		boolean drive = true; 
+		boolean driveDistance = true; 
+		
 		while (!(vehicle.isStranded()))
 		{
-			System.out.println("Type yes if you would just like to drive to the next gas station and no if you want to input how far to drive: "); 
+			System.out.println("Type yes if you would just like to drive to the next gas station (get a full tank) and no if you want to input how far to drive: "); 
 			if (keyboard.nextLine().equals("yes"))
-				vehicle.drive(); 
+				drive = vehicle.drive();  
 			else
 			{
 				System.out.println("How far do you want to drive? This is a risk..."); 
 				int distance = keyboard.nextInt(); 
 				keyboard.nextLine(); 
-				vehicle.drive(distance); 
+				driveDistance = vehicle.drive(distance); 
+			}
+			if (drive == false)
+			{
+				System.out.println("The requested operation was unsuccessful. Your vehicle was not equipped.");
+				break; 
 			}
 			if (vehicle.isStranded())
 			{
-				if (vehicle.getTires() < 4){
+				if (vehicle.getTires() < vehicle.getTires()){
 					System.out.println("Your tires exploded! Now you must walk. So terrible!"); 
 					break; 
 				}
@@ -75,34 +98,27 @@ public class RoadTrip
 				System.out.println("Please type 'yes' if you would like to top up your vehicle");
 				if (keyboard.nextLine().equals("yes")){
 				
-					if ((30-vehicle.getFuel())*3>vehicle.getMoney()){
+					if (((vehicle.getFuelCapacity() - vehicle.getFuel())*3) > vehicle.getMoney()){
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
 						if (keyboard.nextLine().equals("yes"))
 							sellItems(vehicle, cargoPrice, keyboard);
 					}
 					
-					if ((30-vehicle.getFuel())*3<=vehicle.getMoney())
+					if (((vehicle.getFuelCapacity() - vehicle.getFuel()) * 3) <= vehicle.getMoney())
 						vehicle.fillGas();
 				}
 				System.out.println("Please type 'yes' if you would like to purchase a tire for the journey"); 
-				while (keyboard.nextLine().equals("yes")){
-				
-					if (vehicle.getMoney()<90){
-						System.out.println("I'm sorry, you don't have enough money for that");
-						System.out.println("Would you like to sell some cargo?");
-						if (keyboard.nextLine().equals("yes"))
-							sellItems(vehicle, cargoPrice, keyboard);
-					}
-					
-					if (vehicle.getMoney()>=90){
-						vehicle.buyTire(); 
-					}
-				}
-				
-				System.out.println("Would you like to buy some cargo?");
-				if (keyboard.nextLine().equals("yes")){
-					buyItems(vehicle, cargoPrice, keyboard);
+				String next = keyboard.nextLine();
+				if (next.equals("yes"))
+				{
+					if (vehicle.getMoney() < 90)
+						System.out.println("I'm sorry, you don't have enough money for that."); 
+					else
+					{
+						vehicle.setTires(vehicle.getTires() + 1); 
+						vehicle.setMoney(vehicle.getMoney() - 90);
+					} 
 				}
 			}
 				
