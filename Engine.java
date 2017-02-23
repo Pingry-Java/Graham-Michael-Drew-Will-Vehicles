@@ -15,7 +15,7 @@ public class Engine{
 		if ((speed * (weight + cargo)) > (cylinders * 800))
 			return -1; 
 		else
-			return .00000004 * distance * (weight + cargo) * speed * speed; //just used a calculated constant
+			return .000000007 * distance * (weight + cargo) * speed * speed; //just used a calculated constant
 	}
 	
 	public double getWeight(){

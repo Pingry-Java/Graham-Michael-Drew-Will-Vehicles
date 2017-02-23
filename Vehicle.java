@@ -39,10 +39,10 @@ public class Vehicle{
   
  }
  
- public void drive(){
+ public void drive(){ //call other method with 200
    fuel -= 10;
    forwardProgress += 200; 
-   int chance = (int) Math.random() * 100; 
+   int chance = (int) (Math.random() * 100); 
    if (chance <= 20) //Chance of losing tire = distance / 10
     tires --;  
 
@@ -58,7 +58,7 @@ public class Vehicle{
    	this.fillGas(); 
    	forwardProgress += (distance + distanceToGas);
    } 
-   int chances = (int) Math.random() * 100; 
+   int chances = (int) (Math.random() * 100); 
    if (chances <= (distance + (distanceToGas / 10)))
     tires --;    
    
