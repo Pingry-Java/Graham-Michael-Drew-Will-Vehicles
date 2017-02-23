@@ -11,7 +11,8 @@ public class RoadTrip
 		System.out.println("Please type what type of vehicle you would like to drive: bus, car, motorcycle, truck?"); 
 		String vehicleType = keyboard.nextLine(); 
 		
-		Vehicle vehicle; 
+		Vehicle vehicle;
+		 
 		if (vehicleType.equals("bus"))
 			vehicle = new Bus(); 
 		else if (vehicleType.equals("car"))
@@ -20,7 +21,7 @@ public class RoadTrip
 			vehicle = new Truck(); 
 		else
 			vehicle = new Motorcycle();
-		
+ 
 		System.out.println("You are starting in New York. Will you make it across the country to San Francisco?");
 		System.out.println("I will fill the first tank of gas for you. Gas is 3 dollars a gallon, a tire is $90");
 		System.out.println("BEWARE - the probability of blowing out a tire increases with distance traveled."); 
@@ -28,9 +29,23 @@ public class RoadTrip
 		
 		
 		vehicle.fillGas();  
+		
+		System.out.println("How many passangers will you take in your vehicle? "); 
+		int passengers = keyboard.nextInt(); 
+		keyboard.nextLine(); 
+		vehicle.setPassengers(passengers); 
+		//Passengers are cargo
+		int weighCargo = passengers * 150; 
+		
+		//Ask if they want cargo
+		System.out.println("How much cargo will you add? "); 
+		int cargo = keyboard.nextInt(); 
+		keyboard.nextLine(); 
+		vehicle.setCargo(weighCargo + cargo); 
+		
 		while (!(vehicle.isStranded()))
 		{
-			System.out.println("Type yes if you would just like to drive to the next gas station and no if you want to input how far to drive: "); 
+			System.out.println("Type yes if you would just like to drive to the next gas station (get a full tank) and no if you want to input how far to drive: "); 
 			if (keyboard.nextLine().equals("yes"))
 				vehicle.drive(); 
 			else

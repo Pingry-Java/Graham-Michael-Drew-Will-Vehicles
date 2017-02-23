@@ -16,12 +16,7 @@ public class Motorcycle extends Vehicle{
   tires = 3; 
   forwardProgress = 0; //Miles 
   speed = 60; //Mph 
- }
- 
-  public void fillGas(){
-  double gallons = 15 - fuel; 	
-  fuel = 15; 
-  money -= (gallons * 3); //each gallon costs 3 dollars 
+  engine = new Engine(4); 
  }
  
  public boolean isStranded(){

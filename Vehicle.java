@@ -4,7 +4,7 @@ public class Vehicle{
  protected static double cargoCapacity;
  protected static int wheels = 4;
  protected static double baseWeight = 1000;
- protected static Engine engine;
+ protected Engine engine;
  
  protected double money; 
  protected double fuel;
@@ -22,6 +22,7 @@ public class Vehicle{
   for (int n = 0; n < 10; n++){
    gasStops[n] = 200 * n+1; 
   }
+  
  }
  
  public Vehicle(){
@@ -34,6 +35,7 @@ public class Vehicle{
   tires = 5;  
   forwardProgress = 0; //Miles 
   speed = 60; //Mph 
+  engine = new Engine(); 
   
  }
  
@@ -47,18 +49,19 @@ public class Vehicle{
 
  } 
  public void drive(int distance){
-   double distanceSoFar = forwardProgress + distance; 
-   //Take away ten gallons of fuel for every 200 miles
-   fuel -= (distance/200.0) * 10; 
+   double requiredFuel = engine.fuelRequired(speed, distance, cargo); 
+   fuel -= requiredFuel; 
+   double distanceSoFar = forwardProgress + distance;
    double distanceToGas = distanceSoFar % 200; 
-   fuel -= (distanceToGas/200.0) * 10; 
-   //check to make sure they made it to gas station
+   fuel -= (distanceToGas/200.0) * 10;
    if (fuel >= 0)
+   {
    	this.fillGas(); 
-   forwardProgress += (distance + distanceToGas); 
+   	forwardProgress += (distance + distanceToGas);
+   } 
    int chances = (int) Math.random() * 100; 
    if (chances <= (distance + (distanceToGas / 10)))
-    tires --; 
+    tires --;    
    
  }
  public boolean isStranded(){
@@ -80,8 +83,8 @@ public class Vehicle{
  }
  
  public void fillGas(){
-  double gallons = 30 - fuel; 	
-  fuel = 30; 
+  double gallons = fuelCapacity - fuel; 	
+  fuel = fuelCapacity; 
   money -= (gallons * 3); //each gallon costs 3 dollars
  }
  

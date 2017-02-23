@@ -6,8 +6,16 @@ public class Engine{
 		this(6);
 	}
 	public Engine(int cylinders){
-		this.cylinders=cylinders; // we don't have to do anything with this number
-		this.weight = cylinders * cylinders * cylinders; // we don't have to do anything with this number
+		this.cylinders= cylinders;
+		this.weight = cylinders * cylinders * cylinders; 
+	}
+	
+	public double fuelRequired(double speed, double distance, double cargo)
+	{
+		if ((speed * (weight + cargo)) > (cylinders * 800))
+			return -1; 
+		else
+			return .00000004 * distance * (weight + cargo) * speed * speed; //just used a calculated constant
 	}
 	
 	public double getWeight(){
