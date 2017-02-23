@@ -127,7 +127,7 @@ public class RoadTrip
 	
 	public static void printResources(Vehicle vehicle){
 		System.out.println("RESOURCES REMAINING"); 
-		System.out.println("\tGallons of gas: " + vehicle.getFuel()); 
+		System.out.println("\tGallons of gas: " + Math.round(vehicle.getFuel() * 1000.0) / 1000.0); 
 		System.out.println("\tTires remaining: " + vehicle.getTires()); 
 		System.out.println("\tDistance traveled: " + vehicle.getForwardProgress());
 		System.out.println("\tMoney remaining: " + vehicle.getMoney()); 

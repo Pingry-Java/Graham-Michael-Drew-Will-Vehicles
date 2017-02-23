@@ -69,7 +69,7 @@ public class Vehicle{
    //Test for -1 when you do required fuel
    double requiredFuel = engine.fuelRequired(speed, distance, cargo);
    double distanceToGas;
-   System.out.println(requiredFuel); 
+   System.out.println("You took about " + Math.round(requiredFuel * 1000.0) / 1000.0 + " gallons of fuel to drive " + distance + " miles."); 
    if (requiredFuel == -1)
     return false; 
    else 
@@ -100,41 +100,73 @@ public class Vehicle{
    }
    
  }
+
+ /**
+  * Checks if a vehicle is stranded (for car), is overridden in other instances of vehicle.
+  * @return whether the vehicle has less than 4 tires, less than 0 fuel, or less than 0 monies
+  */
  public boolean isStranded(){
   return (tires < 4 || fuel <= 0 || money <= 0);
  }
  
+ /**
+  * Checks if a vehicle has arrived.
+  * @return whether the vehicle has traveled 2890 miles.
+  */
  public boolean arrived(){
   return (forwardProgress >= finishLine);
  }
  
- 
+ /**
+  * Checks the distance a vehicle must travel to the next gas stop
+  * @return the number of miles until the vehicle will arrive at the next gas stop
+  */
  public double distanceToNextStop(){
   return forwardProgress % 200; 
  }
  
- 
+ /**
+  * Checks how much a particular vehicle weighs
+  * @return the amount of weight, in pounds, of the vehicle plus cargo.
+  */
  public double totalWeight(){
   return baseWeight + cargo; 
  }
- 
+
+ /**
+  * Fills the vehicle's gas tank. Calculates how much gas was added and 
+  * subtracts the cost from player's money at $3 per gallon.
+  */
  public void fillGas(){
   double gallons = fuelCapacity - fuel;   
   fuel = fuelCapacity; 
   money -= (gallons * 3); //each gallon costs 3 dollars
  }
  
+ /**
+  * Adds some amount of cargo to the amount of cargo in the vehicle.
+  * @param x The amount (in pounds) of cargo to be added.
+  */
  public void loadCargo(int x){
   this.cargo+=x;
  }
  
+ /**
+  * Purchases some amount of cargo. Adds the amount and subtracts the price (based on amount)
+  * @param x The amount of cargo to be added
+  * @param cargoPrice The cost of the cargo, per pound, to be added.
+  */
  public void buyCargo(int x, int cargoPrice){
   if(x*cargoPrice<this.money){
     this.cargo+=x;
-    this.cargo-=x*cargoPrice;
+    this.money-=x*cargoPrice;
   }
  }
  
+ /**
+  * Checks how much a particular vehicle weighs
+  * @return the amount of weight, in pounds, of the vehicle plus cargo.
+  */
  public void sellCargo(int x, int cargoPrice){
   if(cargo>=x){
     this.cargo-=x;
