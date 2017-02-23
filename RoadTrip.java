@@ -101,7 +101,8 @@ public class RoadTrip
 						vehicle.fillGas();
 				}
 				System.out.println("Please type 'yes' if you would like to purchase a tire for the journey"); 
-				while (keyboard.nextLine().equals("yes")){
+				String next = keyboard.nextLine();
+				while (next.equals("yes")){
 				
 					if (vehicle.getMoney()<90){
 						System.out.println("I'm sorry, you don't have enough money for that");
@@ -110,9 +111,11 @@ public class RoadTrip
 							sellItems(vehicle, cargoPrice, keyboard);
 					}
 					
-					if (vehicle.getMoney()>=90){
+					else{
 						vehicle.buyTire(); 
+						next = "";
 					}
+					
 				}
 				
 				System.out.println("Would you like to buy some cargo?");
