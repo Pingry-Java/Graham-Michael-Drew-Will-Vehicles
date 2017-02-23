@@ -39,28 +39,43 @@ public class Vehicle{
   
  }
  
- public void drive(){ //call other method with 200
-   fuel -= 10;
-   forwardProgress += 200; 
-   int chance = (int) (Math.random() * 100); 
-   if (chance <= 20) //Chance of losing tire = distance / 10
-    tires --;  
+ public boolean drive(){ //call other method with 200
+   return this.drive(200); 
 
  } 
- public void drive(int distance){
-   double requiredFuel = engine.fuelRequired(speed, distance, cargo); 
-   fuel -= requiredFuel; 
-   double distanceSoFar = forwardProgress + distance;
-   double distanceToGas = distanceSoFar % 200; 
-   fuel -= (distanceToGas/200.0) * 10;
-   if (fuel >= 0)
+ public boolean drive(int distance){
+   //Test for -1 when you do required fuel
+   double requiredFuel = engine.fuelRequired(speed, distance, cargo);
+   double distanceToGas;
+   System.out.println(requiredFuel); 
+   if (requiredFuel == -1)
+   	return false; 
+   else 
    {
-   	this.fillGas(); 
-   	forwardProgress += (distance + distanceToGas);
-   } 
-   int chances = (int) (Math.random() * 100); 
-   if (chances <= (distance + (distanceToGas / 10)))
-    tires --;    
+   	fuel -= requiredFuel;
+   	if (fuel < 0)
+   		return false; 
+   	else
+   	{
+   		forwardProgress += distance; 
+   		if ((forwardProgress % 200) != 0)
+   			distanceToGas = 200 - (forwardProgress % 200); //this is the wrong calculation 
+   		else
+   			distanceToGas = 0; 
+   		double moreFuel = engine.fuelRequired(speed, distanceToGas, cargo); 
+   		fuel -= moreFuel; 
+   		if (fuel < 0)
+   			return false; 
+   		else
+   		{
+   			forwardProgress += distanceToGas;
+   			int chances = (int) (Math.random() * 100); 
+   			if (chances <= (distance / 20))
+    			tires --;
+   			return true; 
+   		}
+   	}
+   }
    
  }
  public boolean isStranded(){
@@ -85,11 +100,6 @@ public class Vehicle{
   double gallons = fuelCapacity - fuel; 	
   fuel = fuelCapacity; 
   money -= (gallons * 3); //each gallon costs 3 dollars
- }
- 
- public void buyTire(){
-  tires++; 
-  money -= 90; 
  }
  
  public void loadCargo(int x){

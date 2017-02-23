@@ -43,21 +43,29 @@ public class RoadTrip
 		keyboard.nextLine(); 
 		vehicle.setCargo(weighCargo + cargo); 
 		
+		boolean drive = true; 
+		boolean driveDistance = true; 
+		
 		while (!(vehicle.isStranded()))
 		{
 			System.out.println("Type yes if you would just like to drive to the next gas station (get a full tank) and no if you want to input how far to drive: "); 
 			if (keyboard.nextLine().equals("yes"))
-				vehicle.drive(); 
+				drive = vehicle.drive();  
 			else
 			{
 				System.out.println("How far do you want to drive? This is a risk..."); 
 				int distance = keyboard.nextInt(); 
 				keyboard.nextLine(); 
-				vehicle.drive(distance); 
+				driveDistance = vehicle.drive(distance); 
+			}
+			if (drive == false)
+			{
+				System.out.println("The requested operation was unsuccessful. Your vehicle was not equipped.");
+				break; 
 			}
 			if (vehicle.isStranded())
 			{
-				if (vehicle.getTires() < 4){
+				if (vehicle.getTires() < vehicle.getTires()){
 					System.out.println("Your tires exploded! Now you must walk. So terrible!"); 
 					break; 
 				}
@@ -90,37 +98,27 @@ public class RoadTrip
 				System.out.println("Please type 'yes' if you would like to top up your vehicle");
 				if (keyboard.nextLine().equals("yes")){
 				
-					if ((30-vehicle.getFuel())*3>vehicle.getMoney()){
+					if (((vehicle.getFuelCapacity() - vehicle.getFuel())*3) > vehicle.getMoney()){
 						System.out.println("I'm sorry, you don't have enough money for that");
 						System.out.println("Would you like to sell some cargo?");
 						if (keyboard.nextLine().equals("yes"))
 							sellItems(vehicle, cargoPrice, keyboard);
 					}
 					
-					if ((30-vehicle.getFuel())*3<=vehicle.getMoney())
+					if (((vehicle.getFuelCapacity() - vehicle.getFuel()) * 3) <= vehicle.getMoney())
 						vehicle.fillGas();
 				}
 				System.out.println("Please type 'yes' if you would like to purchase a tire for the journey"); 
 				String next = keyboard.nextLine();
-				while (next.equals("yes")){
-				
-					if (vehicle.getMoney()<90){
-						System.out.println("I'm sorry, you don't have enough money for that");
-						System.out.println("Would you like to sell some cargo?");
-						if (keyboard.nextLine().equals("yes"))
-							sellItems(vehicle, cargoPrice, keyboard);
-					}
-					
-					else{
-						vehicle.buyTire(); 
-						next = "";
-					}
-					
-				}
-				
-				System.out.println("Would you like to buy some cargo?");
-				if (keyboard.nextLine().equals("yes")){
-					buyItems(vehicle, cargoPrice, keyboard);
+				if (next.equals("yes"))
+				{
+					if (vehicle.getMoney() < 90)
+						System.out.println("I'm sorry, you don't have enough money for that."); 
+					else
+					{
+						vehicle.setTires(vehicle.getTires() + 1); 
+						vehicle.setMoney(vehicle.getMoney() - 90);
+					} 
 				}
 			}
 				
