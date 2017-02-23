@@ -13,6 +13,7 @@ public class RoadTrip
 		
 		Vehicle vehicle;
 		 
+		// Checks the user's selection of vehicle
 		if (vehicleType.equals("bus"))
 			vehicle = new Bus(); 
 		else if (vehicleType.equals("car"))
@@ -24,10 +25,9 @@ public class RoadTrip
  
 		System.out.println("You are starting in New York. Will you make it across the country to San Francisco?");
 		System.out.println("I will fill the first tank of gas for you. Gas is 3 dollars a gallon, a tire is $90");
-		System.out.println("BEWARE - the probability of blowing out a tire increases with distance traveled."); 
-		System.out.println();
+		System.out.println("BEWARE - the probability of blowing out a tire increases with distance traveled.\n"); 		
 		
-		
+		// Fills the tank of gas to begin the game
 		vehicle.fillGas();  
 		
 		System.out.println("How many passangers will you take in your vehicle? "); 
