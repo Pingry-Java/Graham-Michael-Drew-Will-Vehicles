@@ -1,4 +1,7 @@
 public class Vehicle{
+
+ // protected variables for access from other classes
+ // static variables which are constant for all vehicles
  protected static double fuelCapacity;
  protected static int seats = 4; 
  protected static double cargoCapacity;
@@ -6,6 +9,7 @@ public class Vehicle{
  protected static double baseWeight = 1000;
  protected Engine engine;
  
+ // non-static variables which change throughout the trip
  protected double money; 
  protected double fuel;
  protected int passengers;
@@ -17,6 +21,8 @@ public class Vehicle{
  protected static int[] gasStops; 
  protected static final int finishLine = 2890; 
  
+ // static initializer for the array which contains the 
+ // number of gas stops and the distance between each one.
  static {
   gasStops = new int[10]; 
   for (int n = 0; n < 10; n++){
@@ -25,7 +31,11 @@ public class Vehicle{
   
  }
  
- public Vehicle(){
+ /**
+  * Default constructor for Vehicle
+  * Contains values for "car" by default
+  */
+  public Vehicle(){
   fuelCapacity = 30; //Gallons  
   cargoCapacity = 300;  //Pounds
   money = 1000; //USD 
@@ -39,10 +49,22 @@ public class Vehicle{
   
  }
  
+ /**
+  * Drive method, calls the overloaded drive method with 200 miles as 
+  * its default value.
+  * @return The drive method with 200 as distance.
+  */
  public boolean drive(){ //call other method with 200
    return this.drive(200); 
 
  } 
+
+ /**
+  * Overloaded drive method, takes a distance and calculates how far can be traveled, subtracts the fuel and adds 
+  * the specified distance traveled, and checks if tires have blown.
+  * @param distance Takes in the distance which the player would like to travel.
+  * @return whether the player can drive the specified distance.
+  */
  public boolean drive(int distance){
    //Test for -1 when you do required fuel
    double requiredFuel = engine.fuelRequired(speed, distance, cargo);
@@ -69,7 +91,7 @@ public class Vehicle{
       else
       {
         forwardProgress += distanceToGas;
-        int chances = (int) (Math.random() * 100); 
+        int chances = (int) (Math.random() * 100); // checks if your tires have blown, chances increase with distance.
         if (chances <= (distance / 20))
           tires --;
         return true; 
