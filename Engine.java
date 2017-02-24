@@ -1,5 +1,5 @@
 public class Engine{
-	private int cylinders; // this is the basic indicator for the strength of an engine
+	private int cylinders; // this is the basic indicator for the strength of an engine 
 	private double weight;
 	
 	public Engine(){
@@ -7,7 +7,7 @@ public class Engine{
 	}
 	public Engine(int cylinders){
 		this.cylinders= cylinders;
-		this.weight = cylinders * cylinders; 
+		this.weight = 70 * cylinders; 
 	}
 	
 	public double fuelRequired(double speed, double distance, double cargo)

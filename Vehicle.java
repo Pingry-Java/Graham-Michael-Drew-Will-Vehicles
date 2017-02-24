@@ -63,13 +63,16 @@ public class Vehicle{
   * Overloaded drive method, takes a distance and calculates how far can be traveled, subtracts the fuel and adds 
   * the specified distance traveled, and checks if tires have blown.
   * @param distance Takes in the distance which the player would like to travel.
-  * @return whether the player can drive the specified distance.
+  * @return whether the player can drive the specified distance. 
   */
  public boolean drive(int distance){
    //Test for -1 when you do required fuel
    double requiredFuel = engine.fuelRequired(speed, distance, cargo);
    double distanceToGas;
-   System.out.println("You took about " + Math.round(requiredFuel * 1000.0) / 1000.0 + " gallons of fuel to drive " + distance + " miles."); 
+   if (requiredFuel == -1)
+    System.out.println("You didn't have enough fuel. Too bad!");
+  else
+    System.out.println("You took about " + Math.round(requiredFuel * 1000.0) / 1000.0 + " gallons of fuel to drive " + distance + " miles."); 
    if (requiredFuel == -1)
     return false; 
    else 

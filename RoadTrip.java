@@ -7,6 +7,7 @@ public class RoadTrip
 		Scanner keyboard = new Scanner(System.in); 
 		int cargoPrice;
 		
+		// friendly greeting
 		System.out.println("Welcome to Road Trip, a REALLY fun, interactive game!"); 
 		System.out.println("Please type what type of vehicle you would like to drive: bus, car, motorcycle, truck?"); 
 		String vehicleType = keyboard.nextLine(); 
@@ -23,6 +24,7 @@ public class RoadTrip
 		else
 			vehicle = new Motorcycle();
  
+ 		//background story
 		System.out.println("You are starting in New York. Will you make it across the country to San Francisco?");
 		System.out.println("I will fill the first tank of gas for you. Gas is 3 dollars a gallon, a tire is $90");
 		System.out.println("BEWARE - the probability of blowing out a tire increases with distance traveled.\n"); 		
@@ -30,6 +32,7 @@ public class RoadTrip
 		// Fills the tank of gas to begin the game
 		vehicle.fillGas();  
 		
+		// Gets passengers in the vehicle for weight
 		System.out.println("How many passangers will you take in your vehicle? "); 
 		int passengers = keyboard.nextInt(); 
 		keyboard.nextLine(); 
@@ -46,6 +49,7 @@ public class RoadTrip
 		boolean drive = true; 
 		boolean driveDistance = true; 
 		
+		// checks if a vehicle is stranded (conditions vary between vehicles)
 		while (!(vehicle.isStranded()))
 		{
 			System.out.println("Type yes if you would just like to drive to the next gas station (get a full tank) and no if you want to input how far to drive: "); 
@@ -63,6 +67,8 @@ public class RoadTrip
 				System.out.println("The requested operation was unsuccessful. Your vehicle was not equipped.");
 				break; 
 			}
+
+			// checks the specifics of why the vehicle is stranded
 			if (vehicle.isStranded())
 			{
 				if (vehicle.getTires() < vehicle.getTires()){
@@ -79,7 +85,8 @@ public class RoadTrip
 				}
 
 			}
-			if (vehicle.arrived())
+			// check if the vehicle has driven all the miles
+			if (vehicle.arrived()) 
 			{
 				System.out.println("YOU WON!!!"); 
 				break; 
