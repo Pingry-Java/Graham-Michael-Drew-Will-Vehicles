@@ -190,74 +190,166 @@ public class Vehicle{
  public void setSeats(int x){
   seats = x; 
  } 
+ /**
+  * Set the cargo capacity to some x
+  * @param x The amount of cargo capacity in the vehicle
+  */
  public void setCargoCapacity(double x){
   cargoCapacity = x; 
  } 
+ /**
+  * Set the number of wheels to some x
+  * @param x The number of wheels on the vehicle
+  */
  public void setWheels(int x){
   wheels = x; 
  } 
+ /**
+  * Set the weight of the vehicle to some x
+  * @param x The weight of the vehicle
+  */
  public void setBaseWeight(double x){
   baseWeight = x;
  } 
+ /**
+  * Set the amount of money in dollars to some x
+  * @param x The amount of money the player has
+  */
  public void setMoney(double x){
   money = x; 
  } 
+ /**
+  * Set the amount of fuel in gallons to some x
+  * @param x The amount of fuel in the vehicle
+  */
  public void setFuel(double x){
   fuel = x; 
  } 
+ /**
+  * Set the number of passengers to some x
+  * @param x The number of passengers in the vehicle
+  */
  public void setPassengers(int x){
   passengers = x; 
  } 
+ /**
+  * Set the amount of cargo to some x
+  * @param x The amount of cargo in the vehicle
+  */
  public void setCargo(double x){
   cargo = x; 
  } 
+ /**
+  * Set the number of tires being carried to some x
+  * @param x The number of tires the vehicle is carrying
+  */
  public void setTires(int x){
   tires = x; 
  } 
+ /**
+  * Set the total amount of distance traveled to some x
+  * @param x The total distance the vehicle has traveled
+  */
  public void setForwardProgress(int x){
   forwardProgress = x; 
  } 
+ /**
+  * Set the average speed to some x
+  * @param x The average speed of the vehicle
+  */
  public void setSpeed(double x){
   speed = x; 
  } 
  
  // Accessors =========================================================================
+ /**
+  * Get the fuel capacity of a vehicle
+  * @return The fuel capacity of the vehicle
+  */
  public double getFuelCapacity(){
   return fuelCapacity;  
  } 
+ /**
+  * Get the number of seats in a vehicle
+  * @return The number of seats in the vehicle
+  */
  public int getSeats(){
   return seats; 
  } 
+ /**
+  * Get the cargo capacity of a vehicle
+  * @return The cargo capacity of the vehicle
+  */
  public double getCargoCapacity(){
   return cargoCapacity; 
  } 
+ /**
+  * Get the number of wheels on a vehicle
+  * @return The number of wheels on the vehicle
+  */
  public int getWheels(){
   return wheels; 
  } 
+ /**
+  * Get the weight of a vehicle (excluding cargo, engine and passangers)
+  * @return The base weight of the vehicle
+  */
  public double getBaseWeight(){
   return baseWeight; 
  } 
+ /**
+  * Get the total weight of a vehicle
+  * @return The total weight of the vehicle
+  */
  public double getWeight(){
   return baseWeight + engine.getWeight() + this.cargo + this.passengers*150 + this.tires*10;
  }
+ /**
+  * Get the amount of money a player has
+  * @return The amount of money the player has
+  */
  public double getMoney(){
   return money; 
  } 
+ /**
+  * Get the amount of fuel in a vehicle
+  * @return The amount fuel in the vehicle
+  */
  public double getFuel(){
   return fuel; 
  } 
+ /**
+  * Get the number of passangers in the vehicle
+  * @return The number of passangers in the vehicle
+  */
  public int getPassengers(){
   return passengers; 
  } 
+ /**
+  * Get the cargo weight in a vehicle
+  * @return The weight of the cargo in a vehicle
+  */
  public double getCargo(){
   return cargo; 
  } 
+ /**
+  * Get the number of tires the vehicle is carrying
+  * @return The total number of tires on the vehicle
+  */
  public int getTires(){
   return tires; 
  } 
+ /**
+  * Get the total distance the vehicle has traveled
+  * @return The total distance traveled by the vehicle
+  */
  public double getForwardProgress(){
   return forwardProgress; 
  } 
+ /**
+  * Get the average speed of a vehicle
+  * @return The average speed of the vehicle
+  */
  public double getSpeed(){
   return speed; 
  } 
